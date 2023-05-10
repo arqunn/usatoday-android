@@ -1,4 +1,6 @@
 package com.arqunn.usatoday.data.repository
 
-class NewsRepositoryImpl {
+import com.arqunn.usatoday.domain.repository.NewsRepository
+
+class NewsRepositoryImpl : NewsRepository {
 }
