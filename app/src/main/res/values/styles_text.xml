@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="UsaTodayText" parent="Widget.MaterialComponents.TextView">
+        <item name="android:fontFamily">@font/comme_regular</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="UsaTodayText.Medium">
+        <item name="android:fontFamily">@font/comme_medium</item>
+    </style>
+
+    <style name="UsaTodayText.Medium.12">
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="UsaTodayText.Regular">
+        <item name="android:fontFamily">@font/comme_regular</item>
+    </style>
+
+    <style name="UsaTodayText.SemiBold">
+        <item name="android:fontFamily">@font/comme_semibold</item>
+    </style>
+
+    <style name="UsaTodayText.SemiBold.18">
+        <item name="android:textSize">18sp</item>
+    </style>
+
+</resources>

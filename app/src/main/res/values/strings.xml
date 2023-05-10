@@ -1,3 +1,7 @@
 <resources>
-    <string name="app_name">usatoday-android</string>
+    <string name="app_name">USA Today</string>
+
+    <string name="action_search">Search</string>
+    <string name="action_news">News</string>
+    <string name="action_favorite">Favorites</string>
 </resources>

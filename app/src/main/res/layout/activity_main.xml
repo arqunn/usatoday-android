@@ -47,6 +47,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/purple_500"
+            android:contentDescription="@string/action_search"
             android:outlineSpotShadowColor="@color/white"
             android:src="@drawable/ic_search"
             app:borderWidth="0dp"
@@ -54,7 +55,6 @@
             app:layout_anchor="@id/bottom_app_bar"
             app:maxImageSize="32dp"
             app:tint="@color/white"
-            tools:ignore="ContentDescription"
             tools:targetApi="p" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
