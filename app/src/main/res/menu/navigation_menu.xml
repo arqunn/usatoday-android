@@ -1,4 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <item
+        android:id="@+id/navigation_news"
+        android:icon="@drawable/ic_news"
+        android:title="@string/action_news"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/navigation_favorite"
+        android:icon="@drawable/ic_favorite"
+        android:title="@string/action_favorite"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/place_holder"
+        android:checkable="false"
+        android:enabled="false"
+        android:title=""
+        app:showAsAction="always" />
 </menu>
