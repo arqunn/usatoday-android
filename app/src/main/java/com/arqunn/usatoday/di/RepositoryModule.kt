@@ -21,5 +21,5 @@ class RepositoryModule {
         newsApiClient: NewsApiClient,
         newsMapper: NewsMapper,
         @IODispatcher dispatcher: CoroutineDispatcher
-    ) = NewsRepositoryImpl(newsApiClient, newsMapper, dispatcher)
+    ): NewsRepository = NewsRepositoryImpl(newsApiClient, newsMapper, dispatcher)
 }
