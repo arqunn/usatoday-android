@@ -31,6 +31,11 @@ object Versions {
         const val HILT = "2.44"
     }
 
+    object Retrofit {
+        const val RETROFIT = "2.9.0"
+        const val GSON_CONVERTER = "2.9.0"
+    }
+
     object Test {
         const val JUNIT = "4.13.2"
         const val JUNIT_EXT = "1.1.5"

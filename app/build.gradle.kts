@@ -54,6 +54,7 @@ dependencies {
     navigation()
     coroutine()
     hilt()
+    retrofit()
 
     testImplementations()
 }

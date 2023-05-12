@@ -39,4 +39,9 @@ object Libs {
     // AndroidX - Test
     const val JUNIT_EXT = "androidx.test.ext:junit:${Versions.Test.JUNIT_EXT}"
     const val ESPRESSO = "androidx.test.espresso:espresso-core:${Versions.Test.ESPRESSO}"
+
+    // Network
+    const val NETWORK_RETROFIT = "com.squareup.retrofit2:retrofit:${Versions.Retrofit.RETROFIT}"
+    const val NETWORK_RETROFIT_CONVERTER_GSON =
+        "com.squareup.retrofit2:converter-gson:${Versions.Retrofit.GSON_CONVERTER}"
 }
