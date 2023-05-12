@@ -38,6 +38,11 @@ fun DependencyHandler.hilt() {
     kapt(Libs.HILT_ANDROID_COMPILER)
 }
 
+fun DependencyHandler.retrofit() {
+    implementation(Libs.NETWORK_RETROFIT)
+    implementation(Libs.NETWORK_RETROFIT_CONVERTER_GSON)
+}
+
 fun DependencyHandler.testImplementations() {
     testImplementation(Libs.JUNIT)
     androidTestImplementation(Libs.JUNIT_EXT)
