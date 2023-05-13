@@ -55,6 +55,8 @@ dependencies {
     coroutine()
     hilt()
     retrofit()
+    okHttp()
+    glide()
 
     testImplementations()
 }

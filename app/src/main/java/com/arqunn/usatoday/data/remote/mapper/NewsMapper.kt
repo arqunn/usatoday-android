@@ -7,6 +7,7 @@ import com.arqunn.usatoday.domain.model.NewsResponse
 import com.arqunn.usatoday.domain.model.Source
 import com.arqunn.usatoday.domain.util.DomainMapper
 import com.arqunn.usatoday.util.extensions.orZero
+import com.arqunn.usatoday.util.extensions.splitByDelimiter
 import kotlin.random.Random
 
 class NewsMapper: DomainMapper<NewsResponseDto, NewsResponse> {
@@ -23,12 +24,13 @@ class NewsMapper: DomainMapper<NewsResponseDto, NewsResponse> {
 
     private fun mapToDomainModel(model: ArticleDto): Article {
         return Article(
+            id = Random.nextInt(),
             source = Source(
                 id = model.source?.id ?: Random.nextInt(),
                 name = model.source?.name.orEmpty()
             ),
             author = model.author.orEmpty(),
-            title = model.title.orEmpty(),
+            title = model.title.orEmpty().splitByDelimiter(" - "),
             description = model.description.orEmpty(),
             url = model.url.orEmpty(),
             urlToImage = model.urlToImage.orEmpty(),
