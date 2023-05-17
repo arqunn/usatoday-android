@@ -11,6 +11,7 @@ fun DependencyHandler.fragment() = implementation(Libs.ANDROID_FRAGMENT)
 fun DependencyHandler.constraintLayout() = implementation(Libs.ANDROID_CONSTRAINT_LAYOUT)
 fun DependencyHandler.recyclerView() = implementation(Libs.ANDROID_RECYCLER_VIEW)
 fun DependencyHandler.material() = implementation(Libs.GOOGLE_MATERIAL)
+fun DependencyHandler.glide() = implementation(Libs.GLIDE)
 
 fun DependencyHandler.lifecycle() {
     implementation(Libs.ANDROID_VIEW_MODEL)
@@ -41,6 +42,11 @@ fun DependencyHandler.hilt() {
 fun DependencyHandler.retrofit() {
     implementation(Libs.NETWORK_RETROFIT)
     implementation(Libs.NETWORK_RETROFIT_CONVERTER_GSON)
+}
+
+fun DependencyHandler.okHttp() {
+    implementation(Libs.NETWORK_OKHTTP)
+    implementation(Libs.NETWORK_OKHTTP_LOGGING)
 }
 
 fun DependencyHandler.testImplementations() {

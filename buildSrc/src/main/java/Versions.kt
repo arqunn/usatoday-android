@@ -36,6 +36,15 @@ object Versions {
         const val GSON_CONVERTER = "2.9.0"
     }
 
+    object OKHttp {
+        const val OKHTTP = "4.8.1"
+        const val OKHTTP_LOGGING = "4.8.1"
+    }
+
+    object Other {
+        const val GLIDE = "4.11.0"
+    }
+
     object Test {
         const val JUNIT = "4.13.2"
         const val JUNIT_EXT = "1.1.5"

@@ -1,5 +1,6 @@
 package com.arqunn.usatoday.data.remote
 
+import com.arqunn.usatoday.BuildConfig
 import com.arqunn.usatoday.data.remote.model.NewsResponseDto
 import com.arqunn.usatoday.data.remote.util.NetworkConstants
 import retrofit2.Response
@@ -15,6 +16,6 @@ interface NewsApiClient {
         @Query("page")
         pageNumber: Int = 1,
         @Query("apiKey")
-        apiKey: String = "API_KEY"
+        apiKey: String = BuildConfig.API_KEY
     ): Response<NewsResponseDto>
 }
