@@ -1,3 +1,5 @@
+import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
+
 plugins {
     id(Plugins.ANDROID_APPLICATION)
     id(Plugins.KOTLIN_ANDROID)
@@ -18,6 +20,8 @@ android {
         versionCode = ConfigData.versionCode
         versionName = ConfigData.versionName
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField("String", "API_KEY", "\"${gradleLocalProperties(rootDir).getProperty("API_KEY")}\"")
     }
 
     buildTypes {
