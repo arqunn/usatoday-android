@@ -1,7 +1,10 @@
 package com.arqunn.usatoday.domain.model
 
+import android.os.Parcelable
 import com.arqunn.usatoday.util.base.adapter.ListAdapterItem
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 data class Article(
     override val id: Int,
     val source: Source,
@@ -12,4 +15,4 @@ data class Article(
     val urlToImage: String,
     val publishedAt: String,
     val content: String,
-): ListAdapterItem
+): ListAdapterItem, Parcelable
