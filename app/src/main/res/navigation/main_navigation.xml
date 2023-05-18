@@ -9,6 +9,20 @@
         android:id="@+id/navigation_news"
         android:name="com.arqunn.usatoday.presentation.news.NewsFragment"
         android:label="NewsFragment"
-        tools:layout="@layout/fragment_news"/>
+        tools:layout="@layout/fragment_news" >
+        <action
+            android:id="@+id/action_navigate_news_detail"
+            app:destination="@id/navigation_news_detail" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_news_detail"
+        android:name="com.arqunn.usatoday.presentation.newsdetail.NewsDetailFragment"
+        android:label="NewsDetailFragment"
+        tools:layout="@layout/fragment_news_detail">
+        <argument
+            android:name="article"
+            app:argType="com.arqunn.usatoday.domain.model.Article" />
+    </fragment>
 
 </navigation>

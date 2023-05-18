@@ -1,5 +1,6 @@
 package com.arqunn.usatoday.presentation.news
 
+import androidx.navigation.fragment.findNavController
 import com.arqunn.usatoday.R
 import com.arqunn.usatoday.databinding.FragmentNewsBinding
 import com.arqunn.usatoday.domain.model.Article
@@ -46,7 +47,7 @@ class NewsFragment : BaseFragment<FragmentNewsBinding, NewsViewModel>() {
     }
 
     private fun onClickArticle(article: Article) {
-        context?.showToast("redirect to detail page")
+        findNavController().navigate(NewsFragmentDirections.actionNavigateNewsDetail(article))
     }
 
 }
