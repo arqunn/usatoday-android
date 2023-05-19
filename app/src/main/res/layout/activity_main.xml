@@ -30,7 +30,8 @@
             app:fabAlignmentMode="end"
             app:fabCradleMargin="20dp"
             app:fabCradleRoundedCornerRadius="20dp"
-            app:fabCradleVerticalOffset="10dp">
+            app:fabCradleVerticalOffset="10dp"
+            app:hideOnScroll="true">
 
             <com.google.android.material.bottomnavigation.BottomNavigationView
                 android:id="@+id/bottom_navigation_view"
