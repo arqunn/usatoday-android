@@ -39,7 +39,7 @@
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
             <androidx.appcompat.widget.LinearLayoutCompat
@@ -73,6 +73,7 @@
                             android:layout_height="wrap_content"
                             android:layout_below="@id/tvTitle"
                             android:layout_marginTop="8dp"
+                            android:text="@{item.source.name}"
                             tools:text="CNN" />
 
                     </RelativeLayout>
@@ -85,12 +86,24 @@
                     android:layout_marginTop="16dp"
                     app:cardCornerRadius="0dp">
 
-                    <WebView
-                        android:id="@+id/webView"
+                    <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        tools:foreground="@android:color/darker_gray"
-                        tools:minHeight="150dp" />
+                        android:layout_height="match_parent">
+
+                        <ProgressBar
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentTop="true" />
+
+                        <WebView
+                            android:id="@+id/webView"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_alignParentTop="true"
+                            tools:foreground="@android:color/darker_gray"
+                            tools:minHeight="150dp" />
+
+                    </RelativeLayout>
 
                 </com.google.android.material.card.MaterialCardView>
 
