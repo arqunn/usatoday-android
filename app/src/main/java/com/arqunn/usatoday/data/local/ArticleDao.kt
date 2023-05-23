@@ -5,6 +5,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.arqunn.usatoday.domain.model.Article
+import java.util.concurrent.Flow
 
 @Dao
 interface ArticleDao {
@@ -14,4 +15,7 @@ interface ArticleDao {
 
     @Query("SELECT * FROM articles")
     suspend fun getAllArticles(): List<Article>
+
+    @Query("SELECT * FROM articles WHERE isMyFav = 1")
+    suspend fun getAllFavorites(): List<Article>
 }

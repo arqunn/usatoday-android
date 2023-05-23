@@ -9,7 +9,7 @@
         android:id="@+id/navigation_news"
         android:name="com.arqunn.usatoday.presentation.news.NewsFragment"
         android:label="NewsFragment"
-        tools:layout="@layout/fragment_news" >
+        tools:layout="@layout/fragment_news">
         <action
             android:id="@+id/action_navigate_news_detail"
             app:destination="@id/navigation_news_detail" />
@@ -24,5 +24,11 @@
             android:name="article"
             app:argType="com.arqunn.usatoday.domain.model.Article" />
     </fragment>
+
+    <fragment
+        android:id="@+id/navigation_favorites"
+        android:name="com.arqunn.usatoday.presentation.favorites.FavoritesFragment"
+        android:label="FavoritesFragment"
+        tools:layout="@layout/fragment_favorites" />
 
 </navigation>
