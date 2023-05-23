@@ -1,10 +1,12 @@
 package com.arqunn.usatoday.data.repository
 
+import com.arqunn.usatoday.data.local.ArticleDao
 import com.arqunn.usatoday.data.remote.NewsApiClient
 import com.arqunn.usatoday.data.remote.mapper.NewsMapper
 import com.arqunn.usatoday.data.remote.model.NewsResponseDto
 import com.arqunn.usatoday.data.remote.util.ApiResult
 import com.arqunn.usatoday.di.IODispatcher
+import com.arqunn.usatoday.domain.model.Article
 import com.arqunn.usatoday.domain.model.NewsResponse
 import com.arqunn.usatoday.domain.repository.NewsRepository
 import com.arqunn.usatoday.util.extensions.getResult
@@ -18,18 +20,40 @@ import kotlinx.coroutines.flow.flowOn
 
 class NewsRepositoryImpl(
     private val api: NewsApiClient,
+    private val dao: ArticleDao,
     private val newsMapper: NewsMapper,
     @IODispatcher private val ioDispatcher: CoroutineDispatcher
 ) : NewsRepository {
     override fun getAllNews(): Flow<ApiResult<NewsResponse>> = flow {
         emit(ApiResult.Loading)
-        networkCall {
-            api.getAllNews()
-        }.let { apiResult ->
-            apiResult.isSuccessAndNotNull().letOnTrueOnSuspend {
-                emit(ApiResult.Success(newsMapper.mapToDomainModel(apiResult.getResult() as NewsResponseDto)))
-            }.letOnFalseOnSuspend {
-                emit(ApiResult.Error(Exception("Oops! an unexpected error occurred.")))
+        localCall {
+            dao.getAllArticles()
+        }.let { localResult ->
+            localResult.isSuccess.letOnFalseOnSuspend {
+                networkCall {
+                    api.getAllNews()
+                }.let { apiResult ->
+                    apiResult.isSuccessAndNotNull().letOnTrueOnSuspend {
+                        (apiResult.getResult() as? NewsResponseDto)?.let {
+                            val articles = it.articles?.map { article ->
+                                newsMapper.mapToDomainModel(article)
+                            }
+                            localCallInsert { dao.insertArticleList(articles.orEmpty()) }
+                            emit(ApiResult.Success(newsMapper.mapToDomainModel(it)))
+                        }
+                    }.letOnFalseOnSuspend {
+                        emit(ApiResult.Error(Exception("Oops! an unexpected error occurred.")))
+                    }
+                }
+            }.letOnTrueOnSuspend {
+                val articles = dao.getAllArticles()
+                emit(ApiResult.Success(
+                    NewsResponse(
+                        status = "ok",
+                        totalResults = articles.size,
+                        articles = articles
+                    )
+                ))
             }
         }
     }.flowOn(ioDispatcher)

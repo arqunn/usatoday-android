@@ -22,7 +22,7 @@ class NewsMapper: DomainMapper<NewsResponseDto, NewsResponse> {
         )
     }
 
-    private fun mapToDomainModel(model: ArticleDto): Article {
+    fun mapToDomainModel(model: ArticleDto): Article {
         return Article(
             id = Random.nextInt(),
             source = Source(
@@ -35,7 +35,8 @@ class NewsMapper: DomainMapper<NewsResponseDto, NewsResponse> {
             url = model.url.orEmpty(),
             urlToImage = model.urlToImage.orEmpty(),
             publishedAt = model.publishedAt.orEmpty(),
-            content = model.content.orEmpty()
+            content = model.content.orEmpty(),
+            isMyFav = false
         )
     }
 }
