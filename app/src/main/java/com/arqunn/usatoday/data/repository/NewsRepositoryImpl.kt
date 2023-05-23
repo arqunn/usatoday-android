@@ -57,4 +57,8 @@ class NewsRepositoryImpl(
             }
         }
     }.flowOn(ioDispatcher)
+
+    override suspend fun getAllFavorites(): List<Article> {
+        return dao.getAllFavorites()
+    }
 }

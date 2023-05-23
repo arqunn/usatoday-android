@@ -9,7 +9,7 @@
         app:showAsAction="always" />
 
     <item
-        android:id="@+id/navigation_favorite"
+        android:id="@+id/navigation_favorites"
         android:icon="@drawable/ic_favorite"
         android:title="@string/action_favorite"
         app:showAsAction="always" />
