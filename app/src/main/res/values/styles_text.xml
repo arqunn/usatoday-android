@@ -15,6 +15,10 @@
         <item name="android:textSize">12sp</item>
     </style>
 
+    <style name="UsaTodayText.Medium.18">
+        <item name="android:textSize">18sp</item>
+    </style>
+
     <style name="UsaTodayText.Regular">
         <item name="android:fontFamily">@font/comme_regular</item>
     </style>

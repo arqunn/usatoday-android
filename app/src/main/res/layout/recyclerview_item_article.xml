@@ -75,7 +75,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
                 android:background="@null"
-                android:checked="@{item.isMyFav() == true}"
+                android:checked="@{item.isMyFavorite() == 1}"
                 android:clickable="true"
                 android:focusable="true"
                 android:minWidth="0dp"

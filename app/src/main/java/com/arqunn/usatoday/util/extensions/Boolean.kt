@@ -31,3 +31,5 @@ suspend fun Boolean.letOnFalseOnSuspend(block: suspend () -> Unit): Boolean {
     }
     return true
 }
+
+fun Boolean.toInt() = if (this) 1 else 0

@@ -4,4 +4,6 @@
     <string name="action_search">Search</string>
     <string name="action_news">News</string>
     <string name="action_favorite">Favorites</string>
+
+    <string name="added_to_favorites">Added to Your Favorites</string>
 </resources>

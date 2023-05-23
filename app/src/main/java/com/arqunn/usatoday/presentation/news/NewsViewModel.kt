@@ -4,11 +4,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.arqunn.usatoday.data.remote.util.ApiResult
 import com.arqunn.usatoday.domain.repository.NewsRepository
+import com.arqunn.usatoday.util.extensions.toInt
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -19,6 +18,9 @@ class NewsViewModel @Inject constructor(
 
     private val _viewState = MutableStateFlow<NewsViewState>(NewsViewState.Loading)
     val viewState = _viewState.asStateFlow()
+
+    private val _eventFlow = MutableSharedFlow<NewsViewEvent>()
+    val eventFlow = _eventFlow.asSharedFlow()
 
     init {
         getAllNews()
@@ -38,5 +40,15 @@ class NewsViewModel @Inject constructor(
                 }
             }
         }.launchIn(viewModelScope)
+    }
+
+    fun addUpdateFavorites(
+        articleId: Int,
+        isMyFavorite: Boolean
+    ) = viewModelScope.launch(Dispatchers.IO) {
+        newsRepository.addUpdateFavorites(articleId, isMyFavorite.toInt())
+        if (isMyFavorite) {
+            _eventFlow.emit(NewsViewEvent.ShowAddedToFavoritesDialog)
+        }
     }
 }

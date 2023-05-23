@@ -12,7 +12,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class FavoritesFragment : BaseFragment<FragmentFavoritesBinding, FavoritesViewModel>() {
 
     private val adapter by lazy {
-        ArticleAdapter(::onClickArticle)
+        ArticleAdapter(::onClickArticle, ::onFavoriteChange)
     }
 
     override fun getLayoutResource() = R.layout.fragment_favorites
@@ -35,6 +35,10 @@ class FavoritesFragment : BaseFragment<FragmentFavoritesBinding, FavoritesViewMo
     }
 
     private fun onClickArticle(article: Article) {
+
+    }
+
+    private fun onFavoriteChange(articleId: Int, isMyFavorite: Boolean) {
 
     }
 }

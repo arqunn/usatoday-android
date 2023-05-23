@@ -7,6 +7,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.arqunn.usatoday.R
 import com.arqunn.usatoday.databinding.ActivityMainBinding
+import com.arqunn.usatoday.presentation.dialog.AddedToFavoritesDialog
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -30,5 +31,10 @@ class MainActivity : AppCompatActivity() {
         navController = findNavController(R.id.nav_host_fragment)
         bottomNavigationView.background = null
         bottomNavigationView.setupWithNavController(navController)
+    }
+
+    fun showAddedToFavoritesDialog() {
+        val dialog = AddedToFavoritesDialog(this)
+        dialog.show()
     }
 }

@@ -4,11 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.arqunn.usatoday.domain.repository.NewsRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.update
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.*
 import javax.inject.Inject
 
 @HiltViewModel
@@ -23,10 +19,11 @@ class FavoritesViewModel @Inject constructor(
         getAllFavorites()
     }
 
-    private fun getAllFavorites() = viewModelScope.launch(Dispatchers.IO) {
-        val favorites = newsRepository.getAllFavorites()
-        _viewState.update {
-            it.copy(favorites = favorites)
-        }
+    private fun getAllFavorites() {
+        newsRepository.getAllFavorites().onEach { articles ->
+            _viewState.update {
+                it.copy(favorites = articles)
+            }
+        }.launchIn(viewModelScope)
     }
 }
