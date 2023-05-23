@@ -9,5 +9,10 @@ interface NewsRepository : BaseRepository {
 
     fun getAllNews(): Flow<ApiResult<NewsResponse>>
 
-    suspend fun getAllFavorites(): List<Article>
+    fun getAllFavorites(): Flow<List<Article>>
+
+    suspend fun addUpdateFavorites(
+        articleId: Int,
+        isMyFavorite: Int
+    )
 }

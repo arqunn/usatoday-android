@@ -46,7 +46,7 @@ class NewsRepositoryImpl(
                     }
                 }
             }.letOnTrueOnSuspend {
-                val articles = dao.getAllArticles()
+                val articles = (localResult.data as? List<Article>).orEmpty()
                 emit(ApiResult.Success(
                     NewsResponse(
                         status = "ok",
@@ -58,7 +58,11 @@ class NewsRepositoryImpl(
         }
     }.flowOn(ioDispatcher)
 
-    override suspend fun getAllFavorites(): List<Article> {
+    override fun getAllFavorites(): Flow<List<Article>> {
         return dao.getAllFavorites()
+    }
+
+    override suspend fun addUpdateFavorites(articleId: Int, isMyFavorite: Int) {
+        dao.addUpdateFavorites(articleId, isMyFavorite)
     }
 }

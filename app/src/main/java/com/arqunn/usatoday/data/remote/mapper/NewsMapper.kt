@@ -36,7 +36,7 @@ class NewsMapper: DomainMapper<NewsResponseDto, NewsResponse> {
             urlToImage = model.urlToImage.orEmpty(),
             publishedAt = model.publishedAt.orEmpty(),
             content = model.content.orEmpty(),
-            isMyFav = false
+            isMyFavorite = 0
         )
     }
 }
