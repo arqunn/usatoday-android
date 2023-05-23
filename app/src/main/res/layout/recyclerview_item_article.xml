@@ -5,7 +5,7 @@
 
     <data>
 
-        <import type="com.arqunn.usatoday.util.DateUtils"/>
+        <import type="com.arqunn.usatoday.util.DateUtils" />
 
         <variable
             name="item"
@@ -19,47 +19,72 @@
         app:cardCornerRadius="8dp"
         app:cardElevation="0dp">
 
-        <androidx.appcompat.widget.LinearLayoutCompat
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="wrap_content">
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="match_parent"
-                android:layout_height="108dp"
-                android:background="@android:color/darker_gray"
-                android:contentDescription="@null"
-                android:scaleType="fitXY"
-                app:loadImage="@{item.urlToImage}"
-                tools:layout_height="200dp" />
-
-            <com.google.android.material.textview.MaterialTextView
-                style="@style/UsaTodayText.Medium.12"
+            <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="8dp"
-                android:layout_marginVertical="16dp"
-                android:text="@{item.source.name}"
-                tools:text="CNN" />
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-            <com.google.android.material.textview.MaterialTextView
-                style="@style/UsaTodayText.SemiBold.16"
-                android:layout_width="match_parent"
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="108dp"
+                    android:background="@android:color/darker_gray"
+                    android:contentDescription="@null"
+                    android:scaleType="fitXY"
+                    app:loadImage="@{item.urlToImage}"
+                    tools:layout_height="200dp" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    style="@style/UsaTodayText.Medium.12"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="8dp"
+                    android:layout_marginVertical="16dp"
+                    android:text="@{item.source.name}"
+                    tools:text="CNN" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    style="@style/UsaTodayText.SemiBold.16"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="8dp"
+                    android:text="@{item.title}"
+                    tools:text="How the Voyager probes keep going and going decades after lunch" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    style="@style/UsaTodayText.Medium.12"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="8dp"
+                    android:layout_marginVertical="16dp"
+                    android:text="@{DateUtils.INSTANCE.getRelativeTimeAgo(item.publishedAt)}"
+                    tools:text="2 hours ago" />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <androidx.appcompat.widget.AppCompatCheckBox
+                android:id="@+id/cbFavorite"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="8dp"
-                android:text="@{item.title}"
-                tools:text="How the Voyager probes keep going and going decades after lunch" />
+                android:layout_margin="8dp"
+                android:background="@null"
+                android:checked="@{item.isMyFav() == true}"
+                android:clickable="true"
+                android:focusable="true"
+                android:minWidth="0dp"
+                android:minHeight="0dp"
+                app:buttonCompat="@drawable/selector_checkbox_fav"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-            <com.google.android.material.textview.MaterialTextView
-                style="@style/UsaTodayText.Medium.12"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="8dp"
-                android:layout_marginVertical="16dp"
-                android:text="@{DateUtils.INSTANCE.getRelativeTimeAgo(item.publishedAt)}"
-                tools:text="2 hours ago" />
-
-        </androidx.appcompat.widget.LinearLayoutCompat>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </com.google.android.material.card.MaterialCardView>
 </layout>

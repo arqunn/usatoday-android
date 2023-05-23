@@ -1,5 +1,6 @@
 package com.arqunn.usatoday.di
 
+import com.arqunn.usatoday.data.local.ArticleDatabase
 import com.arqunn.usatoday.data.remote.NewsApiClient
 import com.arqunn.usatoday.data.remote.mapper.NewsMapper
 import com.arqunn.usatoday.data.repository.NewsRepositoryImpl
@@ -19,7 +20,8 @@ class RepositoryModule {
     @Singleton
     fun provideNewsRepository(
         newsApiClient: NewsApiClient,
+        articleDb: ArticleDatabase,
         newsMapper: NewsMapper,
         @IODispatcher dispatcher: CoroutineDispatcher
-    ): NewsRepository = NewsRepositoryImpl(newsApiClient, newsMapper, dispatcher)
+    ): NewsRepository = NewsRepositoryImpl(newsApiClient, articleDb.articleDao, newsMapper, dispatcher)
 }

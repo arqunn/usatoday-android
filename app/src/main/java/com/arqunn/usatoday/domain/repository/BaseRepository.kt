@@ -1,5 +1,6 @@
 package com.arqunn.usatoday.domain.repository
 
+import com.arqunn.usatoday.data.local.DaoResult
 import com.arqunn.usatoday.data.remote.util.ApiResult
 import com.arqunn.usatoday.util.extensions.isSuccessAndNotNull
 import com.arqunn.usatoday.util.extensions.letOnFalse
@@ -18,11 +19,41 @@ interface BaseRepository {
             response.isSuccessAndNotNull().letOnTrue {
                 networkReturn = ApiResult.Success(response.body())
             }.letOnFalse {
-                networkReturn = ApiResult.Error(IOException(response.errorBody()?.string().orEmpty()))
+                networkReturn =
+                    ApiResult.Error(IOException(response.errorBody()?.string().orEmpty()))
             }
-        } catch (e: IllegalArgumentException) {
-            networkReturn = ApiResult.Error(e)
+        } catch (err: IllegalArgumentException) {
+            networkReturn = ApiResult.Error(err)
         }
         return networkReturn
+    }
+
+    suspend fun <T> localCall(
+        call: suspend () -> List<T>?
+    ): DaoResult {
+        var localReturn = DaoResult(isSuccess = true, null)
+        try {
+            val response = call.invoke()
+            response.isNullOrEmpty().letOnFalse {
+                localReturn = DaoResult(true, response)
+            }.letOnTrue {
+                localReturn = DaoResult(false, Exception("An unexpected error occurred"))
+            }
+        } catch (err: IllegalArgumentException) {
+            DaoResult(false, err)
+        }
+        return localReturn
+    }
+
+    suspend fun localCallInsert(
+        call: suspend () -> Unit
+    ): DaoResult {
+        val localReturn: DaoResult = try {
+            call.invoke()
+            DaoResult(true, "The operation completed successfully")
+        } catch (err: IllegalArgumentException) {
+            DaoResult(false, err)
+        }
+        return localReturn
     }
 }
