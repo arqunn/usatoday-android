@@ -1,5 +1,6 @@
 package com.arqunn.usatoday.presentation.favorites
 
+import androidx.navigation.fragment.findNavController
 import com.arqunn.usatoday.R
 import com.arqunn.usatoday.databinding.FragmentFavoritesBinding
 import com.arqunn.usatoday.domain.model.Article
@@ -35,10 +36,10 @@ class FavoritesFragment : BaseFragment<FragmentFavoritesBinding, FavoritesViewMo
     }
 
     private fun onClickArticle(article: Article) {
-
+        findNavController().navigate(FavoritesFragmentDirections.actionNavigateNewsDetail(article))
     }
 
     private fun onFavoriteChange(articleId: Int, isMyFavorite: Boolean) {
-
+        viewModel.addUpdateFavorites(articleId, isMyFavorite)
     }
 }

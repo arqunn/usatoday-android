@@ -3,8 +3,12 @@ package com.arqunn.usatoday.presentation.favorites
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.arqunn.usatoday.domain.repository.NewsRepository
+import com.arqunn.usatoday.presentation.news.NewsViewEvent
+import com.arqunn.usatoday.util.extensions.toInt
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -25,5 +29,12 @@ class FavoritesViewModel @Inject constructor(
                 it.copy(favorites = articles)
             }
         }.launchIn(viewModelScope)
+    }
+
+    fun addUpdateFavorites(
+        articleId: Int,
+        isMyFavorite: Boolean
+    ) = viewModelScope.launch(Dispatchers.IO) {
+        newsRepository.addUpdateFavorites(articleId, isMyFavorite.toInt())
     }
 }
