@@ -23,6 +23,10 @@
         <item name="android:fontFamily">@font/comme_regular</item>
     </style>
 
+    <style name="UsaTodayText.Regular.12">
+        <item name="android:textSize">12sp</item>
+    </style>
+
     <style name="UsaTodayText.SemiBold">
         <item name="android:fontFamily">@font/comme_semibold</item>
     </style>
