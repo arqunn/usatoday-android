@@ -1,9 +1,6 @@
 package com.arqunn.usatoday.data.local
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import com.arqunn.usatoday.domain.model.Article
 import kotlinx.coroutines.flow.Flow
 
@@ -11,14 +8,11 @@ import kotlinx.coroutines.flow.Flow
 interface ArticleDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertArticleList(articleList: List<Article>)
+    suspend fun addToFavorites(article: Article)
 
-    @Query("SELECT * FROM articles")
-    suspend fun getAllArticles(): List<Article>
+    @Delete
+    suspend fun removeFromFavorites(article: Article)
 
-    @Query("SELECT * FROM articles WHERE isMyFavorite = 1")
+    @Query("SELECT * FROM favorites")
     fun getAllFavorites(): Flow<List<Article>>
-
-    @Query("UPDATE articles SET isMyFavorite = :isMyFavorite WHERE id = :articleId")
-    suspend fun addUpdateFavorites(articleId: Int, isMyFavorite: Int)
 }

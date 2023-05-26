@@ -7,9 +7,9 @@ import com.arqunn.usatoday.util.base.adapter.ListAdapterItem
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-@Entity(tableName = "articles")
+@Entity(tableName = "favorites")
 data class Article(
-    @PrimaryKey override val id: Int,
+    @PrimaryKey val uuid: String,
     val source: Source,
     val author: String,
     var title: String,
@@ -18,5 +18,6 @@ data class Article(
     val urlToImage: String,
     val publishedAt: String,
     val content: String,
-    val isMyFavorite: Int,
+    var isMyFavorite: Int = 0,
+    override val id: Int,
 ): ListAdapterItem, Parcelable

@@ -63,7 +63,7 @@ class NewsFragment : BaseFragment<FragmentNewsBinding, NewsViewModel>() {
         findNavController().navigate(NewsFragmentDirections.actionNavigateNewsDetail(article))
     }
 
-    private fun onFavoriteChange(articleId: Int, isMyFavorite: Boolean) {
-        viewModel.addUpdateFavorites(articleId, isMyFavorite)
+    private fun onFavoriteChange(article: Article, isMyFavorite: Boolean) {
+        viewModel.addRemoveFavorite(article, isMyFavorite)
     }
 }

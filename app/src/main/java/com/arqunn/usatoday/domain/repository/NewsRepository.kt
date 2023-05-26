@@ -11,8 +11,7 @@ interface NewsRepository : BaseRepository {
 
     fun getAllFavorites(): Flow<List<Article>>
 
-    suspend fun addUpdateFavorites(
-        articleId: Int,
-        isMyFavorite: Int
-    )
+    suspend fun addToFavorites(article: Article)
+
+    suspend fun removeFromFavorites(article: Article)
 }

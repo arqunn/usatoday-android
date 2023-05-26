@@ -2,6 +2,7 @@ package com.arqunn.usatoday.presentation.favorites
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.arqunn.usatoday.domain.model.Article
 import com.arqunn.usatoday.domain.repository.NewsRepository
 import com.arqunn.usatoday.presentation.news.NewsViewEvent
 import com.arqunn.usatoday.util.extensions.toInt
@@ -31,10 +32,15 @@ class FavoritesViewModel @Inject constructor(
         }.launchIn(viewModelScope)
     }
 
-    fun addUpdateFavorites(
-        articleId: Int,
+    fun addRemoveFavorite(
+        article: Article,
         isMyFavorite: Boolean
     ) = viewModelScope.launch(Dispatchers.IO) {
-        newsRepository.addUpdateFavorites(articleId, isMyFavorite.toInt())
+        if (isMyFavorite) {
+            newsRepository.addToFavorites(article)
+            //_eventFlow.emit(NewsViewEvent.ShowAddedToFavoritesDialog)
+        } else {
+            newsRepository.removeFromFavorites(article)
+        }
     }
 }
