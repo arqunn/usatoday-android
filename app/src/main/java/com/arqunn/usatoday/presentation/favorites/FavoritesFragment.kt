@@ -39,7 +39,7 @@ class FavoritesFragment : BaseFragment<FragmentFavoritesBinding, FavoritesViewMo
         findNavController().navigate(FavoritesFragmentDirections.actionNavigateNewsDetail(article))
     }
 
-    private fun onFavoriteChange(articleId: Int, isMyFavorite: Boolean) {
-        viewModel.addUpdateFavorites(articleId, isMyFavorite)
+    private fun onFavoriteChange(article: Article, isMyFavorite: Boolean) {
+        viewModel.addRemoveFavorite(article, isMyFavorite)
     }
 }

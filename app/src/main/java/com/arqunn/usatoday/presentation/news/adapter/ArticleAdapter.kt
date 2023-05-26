@@ -8,10 +8,11 @@ import com.arqunn.usatoday.domain.model.Article
 import com.arqunn.usatoday.util.base.adapter.BaseListAdapter
 import com.arqunn.usatoday.util.base.adapter.BaseViewHolder
 import com.arqunn.usatoday.util.extensions.executeAfter
+import com.arqunn.usatoday.util.extensions.toInt
 
 class ArticleAdapter(
     private val onClick: (Article) -> Unit,
-    private val onFavoriteChange: (articleId: Int, isMyFavorite: Boolean) -> Unit,
+    private val onFavoriteChange: (article: Article, isMyFavorite: Boolean) -> Unit,
 ) : BaseListAdapter<RecyclerviewItemArticleBinding, Article>() {
 
     override fun getViewType(viewType: Int) = R.layout.recyclerview_item_article
@@ -38,8 +39,11 @@ class ArticleAdapter(
             binding.cbFavorite.setOnClickListener {
                 val position = bindingAdapterPosition.takeIf { it != RecyclerView.NO_POSITION }
                     ?: return@setOnClickListener
-                val item = getItem(position)
-                onFavoriteChange(item.id, binding.cbFavorite.isChecked)
+                val isChecked = binding.cbFavorite.isChecked
+                val item = getItem(position).apply {
+                    this.isMyFavorite = isChecked.toInt()
+                }
+                onFavoriteChange(item, isChecked)
             }
         }
     }
