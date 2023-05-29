@@ -35,4 +35,14 @@
             app:destination="@id/navigation_news_detail" />
     </fragment>
 
+    <fragment
+        android:id="@+id/navigation_search"
+        android:name="com.arqunn.usatoday.presentation.search.SearchFragment"
+        android:label="SearchFragment"
+        tools:layout="@layout/fragment_search">
+        <action
+            android:id="@+id/action_navigate_news_detail"
+            app:destination="@id/navigation_news_detail" />
+    </fragment>
+
 </navigation>

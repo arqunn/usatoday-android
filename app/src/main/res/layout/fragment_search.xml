@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="adapter"
+            type="com.arqunn.usatoday.presentation.search.adapter.ArticleSuggestionAdapter" />
+    </data>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="?attr/primarySurface"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/etSearch"
+            style="@style/UsaTodayText.Medium.18"
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            android:layout_margin="16dp"
+            android:background="@android:drawable/editbox_background"
+            android:hint="@string/search_for_news"
+            android:paddingHorizontal="16dp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:adapter="@{adapter}"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:itemCount="3"
+            tools:listitem="@layout/recyclerview_item_article" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+</layout>

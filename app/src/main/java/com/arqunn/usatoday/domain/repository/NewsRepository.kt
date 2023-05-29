@@ -14,4 +14,6 @@ interface NewsRepository : BaseRepository {
     suspend fun addToFavorites(article: Article)
 
     suspend fun removeFromFavorites(article: Article)
+
+    fun searchForNews(query: String): Flow<ApiResult<NewsResponse>>
 }
