@@ -19,12 +19,19 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         init()
+        initListeners()
     }
 
     private fun init() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setupNavController()
+    }
+
+    private fun initListeners() {
+        binding.fab.setOnClickListener {
+            navController.navigate(R.id.navigation_search, null)
+        }
     }
 
     private fun setupNavController() = with(binding) {

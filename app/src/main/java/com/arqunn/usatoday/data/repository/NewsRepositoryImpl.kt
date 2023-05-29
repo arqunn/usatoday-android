@@ -54,4 +54,19 @@ class NewsRepositoryImpl(
     override suspend fun removeFromFavorites(article: Article) {
         dao.removeFromFavorites(article)
     }
+
+    override fun searchForNews(query: String): Flow<ApiResult<NewsResponse>> = flow {
+        emit(ApiResult.Loading)
+        networkCall {
+            api.searchForNews(query)
+        }.let { apiResult ->
+            apiResult.isSuccessAndNotNull().letOnTrueOnSuspend {
+                (apiResult.getResult() as? NewsResponseDto)?.let { dto ->
+                    emit(ApiResult.Success(newsMapper.mapToDomainModel(dto)))
+                }
+            }.letOnFalseOnSuspend {
+                emit(ApiResult.Error(Exception("Oops! an unexpected error occurred.")))
+            }
+        }
+    }.flowOn(ioDispatcher)
 }

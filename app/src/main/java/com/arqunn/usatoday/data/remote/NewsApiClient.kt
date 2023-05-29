@@ -18,4 +18,16 @@ interface NewsApiClient {
         @Query("apiKey")
         apiKey: String = BuildConfig.API_KEY
     ): Response<NewsResponseDto>
+
+    @GET("v2/everything")
+    suspend fun searchForNews(
+        @Query("q")
+        searchQuery: String,
+        @Query("language")
+        language: String = NetworkConstants.LANGUAGE_KEY,
+        @Query("page")
+        pageNumber: Int = 1,
+        @Query("apiKey")
+        apiKey: String = BuildConfig.API_KEY
+    ): Response<NewsResponseDto>
 }
