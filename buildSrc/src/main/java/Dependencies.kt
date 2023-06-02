@@ -12,6 +12,7 @@ fun DependencyHandler.constraintLayout() = implementation(Libs.ANDROID_CONSTRAIN
 fun DependencyHandler.recyclerView() = implementation(Libs.ANDROID_RECYCLER_VIEW)
 fun DependencyHandler.material() = implementation(Libs.GOOGLE_MATERIAL)
 fun DependencyHandler.glide() = implementation(Libs.GLIDE)
+fun DependencyHandler.stateLayout() = implementation(Libs.STATE_LAYOUT)
 
 fun DependencyHandler.lifecycle() {
     implementation(Libs.ANDROID_VIEW_MODEL)
