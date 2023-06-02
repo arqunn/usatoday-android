@@ -13,7 +13,6 @@
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="?attr/primarySurface"
         android:orientation="vertical">
 
         <androidx.appcompat.widget.AppCompatEditText
@@ -26,14 +25,22 @@
             android:hint="@string/search_for_news"
             android:paddingHorizontal="16dp" />
 
-        <androidx.recyclerview.widget.RecyclerView
+        <com.erkutaras.statelayout.StateLayout
+            android:id="@+id/stateLayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:adapter="@{adapter}"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:itemCount="3"
-            tools:listitem="@layout/recyclerview_item_article" />
+            android:layout_height="match_parent"
+            app:sl_state="content">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:adapter="@{adapter}"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:itemCount="3"
+                tools:listitem="@layout/recyclerview_item_article" />
+
+        </com.erkutaras.statelayout.StateLayout>
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 </layout>

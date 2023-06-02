@@ -43,6 +43,7 @@ object Versions {
 
     object Other {
         const val GLIDE = "4.11.0"
+        const val STATE_LAYOUT = "1.5.0"
     }
 
     object Test {

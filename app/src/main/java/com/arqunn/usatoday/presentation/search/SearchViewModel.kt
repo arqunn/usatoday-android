@@ -7,10 +7,7 @@ import com.arqunn.usatoday.domain.repository.NewsRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.*
 import javax.inject.Inject
 
 @HiltViewModel
@@ -20,8 +17,8 @@ class SearchViewModel @Inject constructor(
 
     private var searchJob: Job? = null
 
-    private val _viewState = MutableStateFlow<SearchViewState>(SearchViewState.Loading)
-    val viewState = _viewState.asStateFlow()
+    private val _viewState = MutableSharedFlow<SearchViewState>()
+    val viewState = _viewState.asSharedFlow()
 
     fun searchForNews(query: String) {
         searchJob?.cancel()

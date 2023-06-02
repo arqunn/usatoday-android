@@ -60,4 +60,5 @@ object Libs {
 
     // Other
     const val GLIDE = "com.github.bumptech.glide:glide:${Versions.Other.GLIDE}"
+    const val STATE_LAYOUT = "com.github.erkutaras:StateLayout:${Versions.Other.STATE_LAYOUT}"
 }

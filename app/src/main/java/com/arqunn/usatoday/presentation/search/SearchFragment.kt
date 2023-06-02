@@ -8,6 +8,7 @@ import com.arqunn.usatoday.domain.model.Article
 import com.arqunn.usatoday.presentation.search.adapter.ArticleSuggestionAdapter
 import com.arqunn.usatoday.util.base.BaseFragment
 import com.arqunn.usatoday.util.extensions.collectFlow
+import com.erkutaras.statelayout.StateLayout
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -42,13 +43,20 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>() {
     private fun setViewState(viewState: SearchViewState) {
         when (viewState) {
             is SearchViewState.Error -> {
-
+                binding.stateLayout.showError(
+                    StateLayout.StateInfo(
+                        infoImage = R.drawable.ic_no_result,
+                        infoTitle = "Whoops...",
+                        infoMessage = "No result found"
+                    )
+                )
             }
             is SearchViewState.Success -> {
                 adapter.submitList(viewState.data.articles)
+                binding.stateLayout.content()
             }
             is SearchViewState.Loading -> {
-
+                binding.stateLayout.loading()
             }
         }
     }

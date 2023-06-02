@@ -61,6 +61,7 @@ dependencies {
     retrofit()
     okHttp()
     glide()
+    stateLayout()
 
     testImplementations()
 }
