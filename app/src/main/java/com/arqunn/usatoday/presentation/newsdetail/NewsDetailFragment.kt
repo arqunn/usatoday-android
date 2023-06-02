@@ -7,7 +7,9 @@ import androidx.navigation.fragment.navArgs
 import com.arqunn.usatoday.R
 import com.arqunn.usatoday.databinding.FragmentNewsDetailBinding
 import com.arqunn.usatoday.domain.model.Article
+import com.arqunn.usatoday.presentation.MainActivity
 import com.arqunn.usatoday.util.base.BaseFragment
+import com.arqunn.usatoday.util.extensions.collectFlow
 import com.google.android.material.appbar.AppBarLayout
 import dagger.hilt.android.AndroidEntryPoint
 import kotlin.math.abs
@@ -27,6 +29,7 @@ class NewsDetailFragment : BaseFragment<FragmentNewsDetailBinding, NewsDetailVie
         readArguments()
         initListeners()
         setupBindings()
+        observe()
     }
 
     private fun readArguments() {
@@ -35,6 +38,9 @@ class NewsDetailFragment : BaseFragment<FragmentNewsDetailBinding, NewsDetailVie
 
     private fun initListeners() {
         binding.appbar.addOnOffsetChangedListener(this)
+        binding.cbFavorite.setOnCheckedChangeListener { _, isChecked ->
+            viewModel.addRemoveFavorite(selectedArticle, isChecked)
+        }
     }
 
     @SuppressLint("SetJavaScriptEnabled")
@@ -46,6 +52,20 @@ class NewsDetailFragment : BaseFragment<FragmentNewsDetailBinding, NewsDetailVie
             settings.domStorageEnabled = true
             webViewClient = WebViewClient()
             loadUrl(selectedArticle.url)
+        }
+    }
+
+    private fun observe() {
+        viewLifecycleOwner.collectFlow(viewModel.eventFlow) {
+            handleNewsDetailViewEvents(it)
+        }
+    }
+
+    private fun handleNewsDetailViewEvents(event: NewsDetailViewEvent) {
+        when (event) {
+            is NewsDetailViewEvent.ShowAddedToFavoritesDialog -> {
+                (requireActivity() as MainActivity).showAddedToFavoritesDialog()
+            }
         }
     }
 

@@ -2,6 +2,7 @@ package com.arqunn.usatoday.presentation
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.core.view.isVisible
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
@@ -28,8 +29,18 @@ class MainActivity : AppCompatActivity() {
         setupNavController()
     }
 
-    private fun initListeners() {
-        binding.fab.setOnClickListener {
+    private fun initListeners() = with(binding) {
+        val noBottomNavigationIds = listOf(
+            R.id.navigation_news_detail,
+            R.id.navigation_search
+        )
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            val shouldShowBottomNavigation = noBottomNavigationIds.contains(destination.id).not()
+            bottomAppBar.isVisible = shouldShowBottomNavigation
+            fab.isVisible = shouldShowBottomNavigation
+        }
+
+        fab.setOnClickListener {
             navController.navigate(R.id.navigation_search, null)
         }
     }

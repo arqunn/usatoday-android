@@ -4,18 +4,16 @@ import androidx.navigation.fragment.findNavController
 import com.arqunn.usatoday.R
 import com.arqunn.usatoday.databinding.FragmentNewsBinding
 import com.arqunn.usatoday.domain.model.Article
-import com.arqunn.usatoday.presentation.MainActivity
 import com.arqunn.usatoday.presentation.news.adapter.ArticleAdapter
 import com.arqunn.usatoday.util.base.BaseFragment
 import com.arqunn.usatoday.util.extensions.collectFlow
-import com.arqunn.usatoday.util.extensions.showToast
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class NewsFragment : BaseFragment<FragmentNewsBinding, NewsViewModel>() {
 
     private val adapter by lazy {
-        ArticleAdapter(::onClickArticle, ::onFavoriteChange)
+        ArticleAdapter(::onClickArticle)
     }
 
     override fun getLayoutResource() = R.layout.fragment_news
@@ -30,10 +28,6 @@ class NewsFragment : BaseFragment<FragmentNewsBinding, NewsViewModel>() {
     private fun observe() {
         viewLifecycleOwner.collectFlow(viewModel.viewState) {
             setViewState(it)
-        }
-
-        viewLifecycleOwner.collectFlow(viewModel.eventFlow) {
-            handleViewEvents(it)
         }
     }
 
@@ -51,19 +45,7 @@ class NewsFragment : BaseFragment<FragmentNewsBinding, NewsViewModel>() {
         }
     }
 
-    private fun handleViewEvents(event: NewsViewEvent) {
-        when (event) {
-            is NewsViewEvent.ShowAddedToFavoritesDialog -> {
-                (requireActivity() as MainActivity).showAddedToFavoritesDialog()
-            }
-        }
-    }
-
     private fun onClickArticle(article: Article) {
         findNavController().navigate(NewsFragmentDirections.actionNavigateNewsDetail(article))
-    }
-
-    private fun onFavoriteChange(article: Article, isMyFavorite: Boolean) {
-        viewModel.addRemoveFavorite(article, isMyFavorite)
     }
 }
