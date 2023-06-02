@@ -13,7 +13,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class FavoritesFragment : BaseFragment<FragmentFavoritesBinding, FavoritesViewModel>() {
 
     private val adapter by lazy {
-        ArticleAdapter(::onClickArticle, ::onFavoriteChange)
+        ArticleAdapter(::onClickArticle)
     }
 
     override fun getLayoutResource() = R.layout.fragment_favorites
@@ -39,7 +39,7 @@ class FavoritesFragment : BaseFragment<FragmentFavoritesBinding, FavoritesViewMo
         findNavController().navigate(FavoritesFragmentDirections.actionNavigateNewsDetail(article))
     }
 
-    private fun onFavoriteChange(article: Article, isMyFavorite: Boolean) {
-        viewModel.addRemoveFavorite(article, isMyFavorite)
+    private fun onFavoriteChange(article: Article) {
+        viewModel.removeFromFavorites(article)
     }
 }

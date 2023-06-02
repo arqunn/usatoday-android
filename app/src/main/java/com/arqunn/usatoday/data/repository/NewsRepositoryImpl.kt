@@ -9,10 +9,12 @@ import com.arqunn.usatoday.di.IODispatcher
 import com.arqunn.usatoday.domain.model.Article
 import com.arqunn.usatoday.domain.model.NewsResponse
 import com.arqunn.usatoday.domain.repository.NewsRepository
-import com.arqunn.usatoday.util.extensions.*
+import com.arqunn.usatoday.util.extensions.getResult
+import com.arqunn.usatoday.util.extensions.isSuccessAndNotNull
+import com.arqunn.usatoday.util.extensions.letOnFalseOnSuspend
+import com.arqunn.usatoday.util.extensions.letOnTrueOnSuspend
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 
@@ -29,13 +31,7 @@ class NewsRepositoryImpl(
         }.let { apiResult ->
             apiResult.isSuccessAndNotNull().letOnTrueOnSuspend {
                 (apiResult.getResult() as? NewsResponseDto)?.let { dto ->
-                    val favArticles = getAllFavorites().first().map { it.uuid }
-                    val newsResponse = newsMapper.mapToDomainModel(dto).also {
-                        it.articles.forEach { article ->
-                            article.isMyFavorite = favArticles.contains(article.url).toInt()
-                        }
-                    }
-                    emit(ApiResult.Success(newsResponse))
+                    emit(ApiResult.Success(newsMapper.mapToDomainModel(dto)))
                 }
             }.letOnFalseOnSuspend {
                 emit(ApiResult.Error(Exception("Oops! an unexpected error occurred.")))

@@ -144,5 +144,19 @@
 
         </androidx.core.widget.NestedScrollView>
 
+        <androidx.appcompat.widget.AppCompatCheckBox
+            android:id="@+id/cbFavorite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:background="@null"
+            android:clickable="true"
+            android:focusable="true"
+            android:minWidth="0dp"
+            android:minHeight="0dp"
+            app:buttonCompat="@drawable/selector_checkbox_fav"
+            app:layout_anchor="@id/appbar"
+            app:layout_anchorGravity="end" />
+
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>
