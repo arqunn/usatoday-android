@@ -120,32 +120,25 @@
 
                 </com.google.android.material.card.MaterialCardView>
 
-                <com.google.android.material.card.MaterialCardView
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="16dp"
-                    app:cardCornerRadius="0dp">
+                    android:layout_marginTop="16dp">
 
-                    <RelativeLayout
+                    <ProgressBar
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true" />
 
-                        <ProgressBar
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentTop="true" />
+                    <WebView
+                        android:id="@+id/webView"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentTop="true"
+                        tools:foreground="@android:color/darker_gray"
+                        tools:minHeight="150dp" />
 
-                        <WebView
-                            android:id="@+id/webView"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_alignParentTop="true"
-                            tools:foreground="@android:color/darker_gray"
-                            tools:minHeight="150dp" />
-
-                    </RelativeLayout>
-
-                </com.google.android.material.card.MaterialCardView>
+                </RelativeLayout>
 
             </androidx.appcompat.widget.LinearLayoutCompat>
 
