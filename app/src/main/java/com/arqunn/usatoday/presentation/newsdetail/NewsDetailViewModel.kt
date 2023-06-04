@@ -19,6 +19,16 @@ class NewsDetailViewModel @Inject constructor(
     private val _eventFlow = MutableSharedFlow<NewsDetailViewEvent>()
     val eventFlow = _eventFlow.asSharedFlow()
 
+    fun checkIfFavorite(article: Article) = viewModelScope.launch {
+        newsRepository.getFavoriteArticleById(article.uuid).let { article ->
+            _eventFlow.emit(
+                NewsDetailViewEvent.ShowFavoriteButton(
+                    isMyFavorite = article != null
+                )
+            )
+        }
+    }
+
     fun addRemoveFavorite(
         article: Article,
         isMyFavorite: Boolean

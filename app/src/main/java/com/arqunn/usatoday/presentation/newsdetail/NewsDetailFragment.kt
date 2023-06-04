@@ -2,6 +2,8 @@ package com.arqunn.usatoday.presentation.newsdetail
 
 import android.annotation.SuppressLint
 import android.webkit.WebViewClient
+import android.widget.CompoundButton
+import android.widget.CompoundButton.OnCheckedChangeListener
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.navArgs
 import com.arqunn.usatoday.R
@@ -16,7 +18,7 @@ import kotlin.math.abs
 
 @AndroidEntryPoint
 class NewsDetailFragment : BaseFragment<FragmentNewsDetailBinding, NewsDetailViewModel>(),
-    AppBarLayout.OnOffsetChangedListener {
+    AppBarLayout.OnOffsetChangedListener, OnCheckedChangeListener {
 
     private val args: NewsDetailFragmentArgs by navArgs()
     private lateinit var selectedArticle: Article
@@ -30,6 +32,7 @@ class NewsDetailFragment : BaseFragment<FragmentNewsDetailBinding, NewsDetailVie
         initListeners()
         setupBindings()
         observe()
+        viewModel.checkIfFavorite(selectedArticle)
     }
 
     private fun readArguments() {
@@ -38,9 +41,6 @@ class NewsDetailFragment : BaseFragment<FragmentNewsDetailBinding, NewsDetailVie
 
     private fun initListeners() {
         binding.appbar.addOnOffsetChangedListener(this)
-        binding.cbFavorite.setOnCheckedChangeListener { _, isChecked ->
-            viewModel.addRemoveFavorite(selectedArticle, isChecked)
-        }
     }
 
     @SuppressLint("SetJavaScriptEnabled")
@@ -66,11 +66,20 @@ class NewsDetailFragment : BaseFragment<FragmentNewsDetailBinding, NewsDetailVie
             is NewsDetailViewEvent.ShowAddedToFavoritesDialog -> {
                 (requireActivity() as MainActivity).showAddedToFavoritesDialog()
             }
+            is NewsDetailViewEvent.ShowFavoriteButton -> {
+                binding.cbFavorite.isChecked = event.isMyFavorite
+                binding.cbFavorite.setOnCheckedChangeListener(this@NewsDetailFragment)
+                binding.cbFavorite.isVisible = true
+            }
         }
     }
 
     override fun onOffsetChanged(appBarLayout: AppBarLayout, verticalOffset: Int) {
         val maxScrollRange = appBarLayout.totalScrollRange
         binding.tvToolbarTitle.isVisible = abs(verticalOffset) == maxScrollRange
+    }
+
+    override fun onCheckedChanged(checkBox: CompoundButton?, isChecked: Boolean) {
+        viewModel.addRemoveFavorite(selectedArticle, isChecked)
     }
 }

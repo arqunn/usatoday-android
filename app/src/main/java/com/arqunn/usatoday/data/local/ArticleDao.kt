@@ -15,4 +15,7 @@ interface ArticleDao {
 
     @Query("SELECT * FROM favorites")
     fun getAllFavorites(): Flow<List<Article>>
+
+    @Query("SELECT * FROM favorites WHERE uuid = :id")
+    suspend fun getFavoriteArticleById(id: String): Article?
 }
