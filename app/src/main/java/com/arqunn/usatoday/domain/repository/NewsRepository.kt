@@ -16,4 +16,6 @@ interface NewsRepository : BaseRepository {
     suspend fun removeFromFavorites(article: Article)
 
     fun searchForNews(query: String): Flow<ApiResult<NewsResponse>>
+
+    suspend fun getFavoriteArticleById(id: String): Article?
 }

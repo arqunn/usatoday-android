@@ -18,6 +18,5 @@ data class Article(
     val urlToImage: String,
     val publishedAt: String,
     val content: String,
-    var isMyFavorite: Int = 0,
     override val id: Int,
 ): ListAdapterItem, Parcelable

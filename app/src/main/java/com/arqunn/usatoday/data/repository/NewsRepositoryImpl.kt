@@ -65,4 +65,8 @@ class NewsRepositoryImpl(
             }
         }
     }.flowOn(ioDispatcher)
+
+    override suspend fun getFavoriteArticleById(id: String): Article? {
+        return dao.getFavoriteArticleById(id)
+    }
 }

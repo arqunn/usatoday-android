@@ -154,9 +154,11 @@
             android:focusable="true"
             android:minWidth="0dp"
             android:minHeight="0dp"
+            android:visibility="gone"
             app:buttonCompat="@drawable/selector_checkbox_fav"
             app:layout_anchor="@id/appbar"
-            app:layout_anchorGravity="end" />
+            app:layout_anchorGravity="end"
+            tools:visibility="visible" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>
