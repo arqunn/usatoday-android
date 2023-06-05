@@ -30,24 +30,15 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initListeners() = with(binding) {
-        val noBottomNavigationIds = listOf(
-            R.id.navigation_news_detail,
-            R.id.navigation_search
-        )
+        val noBottomNavigationIds = listOf(R.id.navigation_news_detail)
         navController.addOnDestinationChangedListener { _, destination, _ ->
             val shouldShowBottomNavigation = noBottomNavigationIds.contains(destination.id).not()
-            bottomAppBar.isVisible = shouldShowBottomNavigation
-            fab.isVisible = shouldShowBottomNavigation
-        }
-
-        fab.setOnClickListener {
-            navController.navigate(R.id.navigation_search, null)
+            bottomNavigationView.isVisible = shouldShowBottomNavigation
         }
     }
 
     private fun setupNavController() = with(binding) {
         navController = findNavController(R.id.nav_host_fragment)
-        bottomNavigationView.background = null
         bottomNavigationView.setupWithNavController(navController)
     }
 

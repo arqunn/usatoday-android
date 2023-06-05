@@ -15,9 +15,8 @@
         app:showAsAction="always" />
 
     <item
-        android:id="@+id/place_holder"
-        android:checkable="false"
-        android:enabled="false"
-        android:title=""
+        android:id="@+id/navigation_search"
+        android:icon="@drawable/ic_search"
+        android:title="@string/action_search"
         app:showAsAction="always" />
 </menu>
