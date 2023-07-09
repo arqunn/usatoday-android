@@ -3,7 +3,8 @@
 
     <string name="action_search">Search</string>
     <string name="action_news">News</string>
-    <string name="action_favorite">Favorites</string>
+    <string name="action_discover">Discover</string>
+    <string name="action_bookmark">Bookmark</string>
 
     <string name="added_to_favorites">Added to Your Favorites</string>
     <string name="search_for_news">Search for news</string>

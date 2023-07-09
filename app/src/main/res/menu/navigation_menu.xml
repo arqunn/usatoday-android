@@ -1,22 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="AlwaysShowAction">
 
     <item
         android:id="@+id/navigation_news"
-        android:icon="@drawable/ic_news"
+        android:icon="@drawable/selector_home_icon"
         android:title="@string/action_news"
         app:showAsAction="always" />
 
     <item
-        android:id="@+id/navigation_favorites"
-        android:icon="@drawable/ic_favorite"
-        android:title="@string/action_favorite"
+        android:id="@+id/navigation_discovery"
+        android:icon="@drawable/selector_discover_icon"
+        android:title="@string/action_discover"
         app:showAsAction="always" />
 
     <item
         android:id="@+id/navigation_search"
-        android:icon="@drawable/ic_search"
+        android:icon="@drawable/selector_search_icon"
         android:title="@string/action_search"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/navigation_bookmark"
+        android:icon="@drawable/selector_bookmark_icon"
+        android:title="@string/action_bookmark"
         app:showAsAction="always" />
 </menu>
