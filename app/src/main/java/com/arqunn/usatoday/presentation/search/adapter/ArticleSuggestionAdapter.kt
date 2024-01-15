@@ -1,13 +1,13 @@
 package com.arqunn.usatoday.presentation.search.adapter
 
 import android.view.ViewGroup
-import androidx.recyclerview.widget.RecyclerView
 import com.arqunn.usatoday.R
 import com.arqunn.usatoday.databinding.RecyclerviewItemSuggestionArticleBinding
 import com.arqunn.usatoday.domain.model.Article
 import com.arqunn.usatoday.util.base.adapter.BaseListAdapter
 import com.arqunn.usatoday.util.base.adapter.BaseViewHolder
 import com.arqunn.usatoday.util.extensions.executeAfter
+import com.arqunn.usatoday.util.extensions.safeOnClick
 
 class ArticleSuggestionAdapter(
     private val onClick: (Article) -> Unit,
@@ -30,9 +30,7 @@ class ArticleSuggestionAdapter(
     ): BaseViewHolder<RecyclerviewItemSuggestionArticleBinding> {
         return super.onCreateViewHolder(parent, viewType).apply {
             binding.root.setOnClickListener {
-                val position = bindingAdapterPosition.takeIf { it != RecyclerView.NO_POSITION }
-                    ?: return@setOnClickListener
-                onClick(getItem(position))
+                safeOnClick { onClick(getItem(it)) }
             }
         }
     }
