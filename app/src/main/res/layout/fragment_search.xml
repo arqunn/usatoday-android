@@ -20,8 +20,10 @@
             style="@style/UsaTodayText.Medium.18"
             android:layout_width="match_parent"
             android:layout_height="54dp"
-            android:layout_margin="16dp"
-            android:background="@android:drawable/editbox_background"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/background_editbox"
+            android:drawableEnd="@drawable/ic_search_not_selected"
             android:hint="@string/search_for_news"
             android:paddingHorizontal="16dp" />
 
@@ -36,11 +38,12 @@
                 android:layout_height="wrap_content"
                 android:clipToPadding="false"
                 android:orientation="vertical"
+                android:paddingVertical="8dp"
                 android:paddingBottom="?attr/actionBarSize"
                 app:adapter="@{adapter}"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 tools:itemCount="3"
-                tools:listitem="@layout/recyclerview_item_article" />
+                tools:listitem="@layout/recyclerview_item_suggested_article" />
 
         </com.erkutaras.statelayout.StateLayout>
 
